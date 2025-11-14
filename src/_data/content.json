@@ -1,0 +1,66 @@
+{
+  "siteTitle": "Selina Fillinger",
+  "navigation": [
+    { "label": "About", "href": "#about" },
+    { "label": "Work", "href": "#work" },
+    { "label": "Recognition", "href": "#recognition" },
+    { "label": "City of Asylum PDX", "href": "#coapdx" },
+    { "label": "Contact", "href": "#contact" }
+  ],
+  "social": {
+    "instagram": "#",
+    "email": "mailto:contact@selinafillinger.com",
+    "linkedin": "#",
+    "imdb": "#"
+  },
+  "hero": {
+    "name": "SELINA FILLINGER",
+    "tagline": "Playwright & Screenwriter",
+    "statement": "Dedicated to dignifying and complicating characters who have long been dismissed by the American canon."
+  },
+  "about": {
+    "bio": "Selina Fillinger is an award-winning, internationally produced playwright and screenwriter. Her feminist farce, POTUS: Or, Behind Every Great Dumbass are Seven Women Trying to Keep Him Alive, garnered three Tony nominations and made Fillinger, at 28, one of the youngest female playwrights ever produced on Broadway.",
+    "background": "Fillinger has written for theatre, TV, and film since she was 22. While an undergraduate at Northwestern University, Selina received her first professional commission for a play; her plays have since been produced all over the world.",
+    "current": "She has developed TV and film projects with AMC, Freeform, Hulu, Netflix, Apple TV, and HBO, and was named to the 2024 Forbes 30 Under 30 list for Hollywood/Entertainment. Fillinger is dedicated to dignifying and complicating characters who have long been dismissed by the American canon."
+  },
+  "work": {
+    "title": "Selected Works",
+    "theatre": {
+      "heading": "THEATRE",
+      "productions": [
+        {
+          "title": "POTUS: Or, Behind Every Great Dumbass are Seven Women Trying to Keep Him Alive",
+          "venue": "Broadway - Shubert Theatre",
+          "description": "Feminist farce that garnered three Tony nominations",
+          "year": "2022"
+        }
+      ]
+    },
+    "screenwriting": {
+      "heading": "FILM & TELEVISION",
+      "description": "Development projects with leading studios and streaming platforms including AMC, Freeform, Hulu, Netflix, Apple TV, and HBO."
+    }
+  },
+  "recognition": {
+    "title": "Recognition & Awards",
+    "achievements": [
+      "Forbes 30 Under 30 - Hollywood/Entertainment (2024)",
+      "Three Tony Award Nominations for POTUS (2022)",
+      "One of the youngest female playwrights produced on Broadway at age 28",
+      "First professional commission as Northwestern University undergraduate",
+      "Internationally produced playwright with works staged around the world"
+    ]
+  },
+  "cityOfAsylum": {
+    "title": "City of Asylum PDX",
+    "role": "Co-Founding Director",
+    "description": "Co-founder of City of Asylum PDX, an Oregon-based nonprofit offering support and sanctuary to writers living in exile due to the political nature of their work. Part of the International Cities of Refuge Network (ICORN).",
+    "link": "https://cityofasylumpdx.org",
+    "quote": "We wanted to combine our politics with our craft in our home state where our earliest creative impulses began."
+  },
+  "contact": {
+    "title": "Get in touch",
+    "message": "For professional inquiries, collaboration opportunities, or general questions.",
+    "button": "Contact"
+  }
+}
