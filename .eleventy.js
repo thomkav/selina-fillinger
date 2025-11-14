@@ -1,9 +1,8 @@
 module.exports = function(eleventyConfig) {
   // Copy static assets to output
   eleventyConfig.addPassthroughCopy("src/assets");
-  eleventyConfig.addPassthroughCopy("src/css/style.css");
 
-  // Watch CSS for changes
+  // Watch CSS for changes (built by PostCSS to _site/css/style.css)
   eleventyConfig.addWatchTarget("src/css/");
 
   return {
