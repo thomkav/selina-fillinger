@@ -14,7 +14,7 @@ module.exports = {
         'earth': '#8b7355',
       },
       fontFamily: {
-        'sans': ['-apple-system', 'BlinkMacSystemFont', '"Segoe UI"', 'Roboto', '"Helvetica Neue"', 'Arial', 'sans-serif'],
+        'sans': ['-apple-system', 'BlinkMacSystemFont', '"Segoe UI"', '"Helvetica Neue"', 'Arial', 'sans-serif'],
         'serif': ['Georgia', '"Times New Roman"', 'serif'],
       },
     },

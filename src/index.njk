@@ -3,227 +3,256 @@ layout: base.njk
 title: Home
 ---
 
-<div x-data='{ content: {{ content | dump(2) | safe }}, mobileMenuOpen: false, formData: { firstName: "", lastName: "", email: "" }, handleSubmit() { console.log("Form submitted:", this.formData); alert("Thank you for your interest! This is a demo form."); } }'>
+{# Navigation #}
+<nav class="fixed top-0 w-full bg-forest-dark/95 backdrop-blur-sm text-cream z-50 shadow-lg">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between items-center h-16">
+            {# Mobile menu button #}
+            <button id="mobile-menu-button"
+                    class="md:hidden text-cream hover:text-sage transition-colors"
+                    aria-expanded="false"
+                    aria-controls="mobile-menu">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                </svg>
+            </button>
 
-    {# Navigation #}
-    <nav class="fixed top-0 w-full bg-forest-dark/95 backdrop-blur-sm text-cream z-50 shadow-lg">
-        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-16">
-                {# Mobile menu button #}
-                <button @click="mobileMenuOpen = !mobileMenuOpen"
-                        class="md:hidden text-cream hover:text-sage transition-colors"
-                        :aria-expanded="mobileMenuOpen">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-                    </svg>
-                </button>
-
-                {# Desktop navigation #}
-                <ul class="hidden md:flex md:space-x-8 mx-auto">
-                    <template x-for="item in content.navigation" :key="item.href">
-                        <li>
-                            <a :href="item.href"
-                               x-text="item.label"
-                               class="text-sm font-medium hover:text-sage transition-colors py-2 border-b-2 border-transparent hover:border-sage">
-                            </a>
-                        </li>
-                    </template>
-                </ul>
-            </div>
-
-            {# Mobile menu #}
-            <div x-show="mobileMenuOpen"
-                 x-cloak
-                 x-transition:enter="transition ease-out duration-200"
-                 x-transition:enter-start="opacity-0 -translate-y-4"
-                 x-transition:enter-end="opacity-100 translate-y-0"
-                 class="md:hidden py-4 border-t border-forest-light">
-                <ul class="space-y-2">
-                    <template x-for="item in content.navigation" :key="item.href">
-                        <li>
-                            <a :href="item.href"
-                               x-text="item.label"
-                               @click="mobileMenuOpen = false"
-                               class="block py-2 px-4 hover:bg-forest-light/50 rounded transition-colors">
-                            </a>
-                        </li>
-                    </template>
-                </ul>
-            </div>
-        </div>
-    </nav>
-
-    {# Hero Section #}
-    <section id="about" class="pt-32 pb-20 bg-gradient-to-b from-forest-dark via-forest to-forest-light text-cream">
-        <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-5xl text-center">
-            <h1 class="text-5xl sm:text-6xl md:text-7xl font-serif mb-4 tracking-tight"
-                x-text="content.hero.name">
-            </h1>
-            <p class="text-xl sm:text-2xl text-sage mb-8 tracking-wide" x-text="content.hero.tagline"></p>
-            <p class="text-xl sm:text-2xl leading-relaxed max-w-3xl mx-auto"
-               x-text="content.hero.statement">
-            </p>
-        </div>
-    </section>
-
-    {# Photo Section #}
-    <section class="w-full">
-        <img src="/assets/images/selina.webp"
-             alt="Selina Fillinger"
-             class="w-full h-[50vh] sm:h-[60vh] object-cover object-center">
-    </section>
-
-    {# About Section #}
-    <section class="py-20 bg-cream">
-        <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl">
-            <div class="space-y-6">
-                <p class="text-xl text-gray-800 leading-relaxed" x-text="content.about.bio"></p>
-                <p class="text-xl text-gray-800 leading-relaxed" x-text="content.about.background"></p>
-                <p class="text-xl text-gray-800 leading-relaxed" x-text="content.about.current"></p>
-            </div>
-        </div>
-    </section>
-
-    {# Work Section #}
-    <section id="work" class="py-20 bg-sage/10">
-        <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-5xl">
-            <h2 class="text-3xl sm:text-4xl font-bold text-forest-dark mb-12 text-center"
-                x-text="content.work.title">
-            </h2>
-
-            <div class="grid md:grid-cols-2 gap-12">
-                {# Theatre #}
-                <div class="bg-white p-8 rounded-lg shadow-lg">
-                    <h3 class="text-2xl font-bold text-forest-dark mb-6 tracking-wide"
-                        x-text="content.work.theatre.heading">
-                    </h3>
-                    <template x-for="production in content.work.theatre.productions" :key="production.title">
-                        <div class="mb-6">
-                            <h4 class="font-bold text-lg mb-2" x-text="production.title"></h4>
-                            <p class="text-sage mb-2" x-text="production.venue"></p>
-                            <p class="text-gray-700" x-text="production.description"></p>
-                            <p class="text-sm text-gray-500 mt-2" x-text="production.year"></p>
-                        </div>
-                    </template>
-                </div>
-
-                {# Screenwriting #}
-                <div class="bg-white p-8 rounded-lg shadow-lg">
-                    <h3 class="text-2xl font-bold text-forest-dark mb-6 tracking-wide"
-                        x-text="content.work.screenwriting.heading">
-                    </h3>
-                    <p class="text-gray-700 leading-relaxed" x-text="content.work.screenwriting.description"></p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    {# Recognition Section #}
-    <section id="recognition" class="py-20 bg-cream">
-        <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl">
-            <h2 class="text-3xl sm:text-4xl font-bold text-forest-dark mb-12 text-center"
-                x-text="content.recognition.title">
-            </h2>
-            <ul class="space-y-4">
-                <template x-for="achievement in content.recognition.achievements" :key="achievement">
-                    <li class="flex items-start">
-                        <span class="text-sage mr-4 text-2xl">•</span>
-                        <span class="text-lg text-gray-700" x-text="achievement"></span>
-                    </li>
-                </template>
+            {# Desktop navigation #}
+            <ul class="hidden md:flex md:space-x-8 mx-auto">
+                {% for item in content.navigation %}
+                <li>
+                    <a href="{{ item.href }}"
+                       class="text-sm font-medium hover:text-sage transition-colors py-2 border-b-2 border-transparent hover:border-sage">
+                        {{ item.label }}
+                    </a>
+                </li>
+                {% endfor %}
             </ul>
         </div>
-    </section>
 
-    {# City of Asylum Section #}
-    <section id="coapdx" class="py-20 bg-forest-dark text-cream">
-        <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl">
-            <h2 class="text-3xl sm:text-4xl font-bold mb-6 text-center"
-                x-text="content.cityOfAsylum.title">
-            </h2>
-            <p class="text-xl text-sage mb-6 text-center" x-text="content.cityOfAsylum.role"></p>
-            <p class="text-lg leading-relaxed mb-6" x-text="content.cityOfAsylum.description"></p>
-            <p class="text-lg italic leading-relaxed mb-8 text-sage/90" x-text="content.cityOfAsylum.quote"></p>
-            <div class="text-center">
-                <a :href="content.cityOfAsylum.link"
-                   class="inline-block px-8 py-4 bg-sage hover:bg-forest-light text-forest-dark hover:text-cream font-bold rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg">
-                    Learn More
-                </a>
+        {# Mobile menu #}
+        <div id="mobile-menu"
+             class="hidden md:hidden py-4 border-t border-forest-light">
+            <ul class="space-y-2">
+                {% for item in content.navigation %}
+                <li>
+                    <a href="{{ item.href }}"
+                       class="block py-2 px-4 hover:bg-forest-light/50 rounded transition-colors">
+                        {{ item.label }}
+                    </a>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</nav>
+
+{# Hero Section #}
+<section id="about" class="pt-32 pb-20 bg-gradient-to-b from-forest-dark via-forest to-forest-light text-cream">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-5xl text-center">
+        <h1 class="text-5xl sm:text-6xl md:text-7xl font-serif mb-4 tracking-tight">
+            {{ content.hero.name }}
+        </h1>
+        <p class="text-xl sm:text-2xl text-sage mb-8 tracking-wide">{{ content.hero.tagline }}</p>
+        <p class="text-xl sm:text-2xl leading-relaxed max-w-3xl mx-auto">
+            {{ content.hero.statement }}
+        </p>
+    </div>
+</section>
+
+{# Photo Section #}
+<section class="w-full">
+    <img src="/assets/images/selina.webp"
+         alt="Selina Fillinger"
+         class="w-full h-[50vh] sm:h-[60vh] object-cover object-center">
+</section>
+
+{# About Section #}
+<section class="py-20 bg-cream">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl">
+        <div class="space-y-6">
+            <p class="text-xl text-gray-800 leading-relaxed">{{ content.about.bio }}</p>
+            <p class="text-xl text-gray-800 leading-relaxed">{{ content.about.background }}</p>
+            <p class="text-xl text-gray-800 leading-relaxed">{{ content.about.current }}</p>
+        </div>
+    </div>
+</section>
+
+{# Work Section #}
+<section id="work" class="py-20 bg-sage/10">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-5xl">
+        <h2 class="text-3xl sm:text-4xl font-bold text-forest-dark mb-12 text-center">
+            {{ content.work.title }}
+        </h2>
+
+        <div class="grid md:grid-cols-2 gap-12">
+            {# Theatre #}
+            <div class="bg-white p-8 rounded-lg shadow-lg">
+                <h3 class="text-2xl font-bold text-forest-dark mb-6 tracking-wide">
+                    {{ content.work.theatre.heading }}
+                </h3>
+                {% for production in content.work.theatre.productions %}
+                <div class="mb-6">
+                    <h4 class="font-bold text-lg mb-2">{{ production.title }}</h4>
+                    <p class="text-sage mb-2">{{ production.venue }}</p>
+                    <p class="text-gray-700">{{ production.description }}</p>
+                    <p class="text-sm text-gray-500 mt-2">{{ production.year }}</p>
+                </div>
+                {% endfor %}
+            </div>
+
+            {# Screenwriting #}
+            <div class="bg-white p-8 rounded-lg shadow-lg">
+                <h3 class="text-2xl font-bold text-forest-dark mb-6 tracking-wide">
+                    {{ content.work.screenwriting.heading }}
+                </h3>
+                <p class="text-gray-700 leading-relaxed">{{ content.work.screenwriting.description }}</p>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
-    {# Contact Section #}
-    <section id="contact" class="py-20 bg-sage/10">
-        <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-3xl text-center">
-            <h2 class="text-3xl sm:text-4xl font-bold mb-6 text-forest-dark" x-text="content.contact.title"></h2>
-            <p class="text-lg mb-12 text-gray-700" x-text="content.contact.message"></p>
+{# Recognition Section #}
+<section id="recognition" class="py-20 bg-cream">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl">
+        <h2 class="text-3xl sm:text-4xl font-bold text-forest-dark mb-12 text-center">
+            {{ content.recognition.title }}
+        </h2>
+        <ul class="space-y-4">
+            {% for achievement in content.recognition.achievements %}
+            <li class="flex items-start">
+                <span class="text-sage mr-4 text-2xl">•</span>
+                <span class="text-lg text-gray-700">{{ achievement }}</span>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+</section>
 
-            <form @submit.prevent="handleSubmit" class="space-y-6 max-w-xl mx-auto">
-                <div class="grid md:grid-cols-2 gap-6">
-                    <div class="text-left">
-                        <label for="first-name" class="block text-sm font-medium mb-2 text-gray-700">
-                            First Name (required)
-                        </label>
-                        <input type="text"
-                               id="first-name"
-                               x-model="formData.firstName"
-                               required
-                               class="w-full px-4 py-3 bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-forest focus:border-transparent transition-all">
-                    </div>
-                    <div class="text-left">
-                        <label for="last-name" class="block text-sm font-medium mb-2 text-gray-700">
-                            Last Name
-                        </label>
-                        <input type="text"
-                               id="last-name"
-                               x-model="formData.lastName"
-                               class="w-full px-4 py-3 bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-forest focus:border-transparent transition-all">
-                    </div>
-                </div>
+{# City of Asylum Section #}
+<section id="coapdx" class="py-20 bg-forest-dark text-cream">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl">
+        <h2 class="text-3xl sm:text-4xl font-bold mb-6 text-center">
+            {{ content.cityOfAsylum.title }}
+        </h2>
+        <p class="text-xl text-sage mb-6 text-center">{{ content.cityOfAsylum.role }}</p>
+        <p class="text-lg leading-relaxed mb-6">{{ content.cityOfAsylum.description }}</p>
+        <p class="text-lg italic leading-relaxed mb-8 text-sage/90">{{ content.cityOfAsylum.quote }}</p>
+        <div class="text-center">
+            <a href="{{ content.cityOfAsylum.link }}"
+               class="inline-block px-8 py-4 bg-sage hover:bg-forest-light text-forest-dark hover:text-cream font-bold rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg">
+                Learn More
+            </a>
+        </div>
+    </div>
+</section>
+
+{# Contact Section #}
+<section id="contact" class="py-20 bg-sage/10">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-3xl text-center">
+        <h2 class="text-3xl sm:text-4xl font-bold mb-6 text-forest-dark">{{ content.contact.title }}</h2>
+        <p class="text-lg mb-12 text-gray-700">{{ content.contact.message }}</p>
+
+        <form id="contact-form" class="space-y-6 max-w-xl mx-auto">
+            <div class="grid md:grid-cols-2 gap-6">
                 <div class="text-left">
-                    <label for="email" class="block text-sm font-medium mb-2 text-gray-700">
-                        Email (required)
+                    <label for="first-name" class="block text-sm font-medium mb-2 text-gray-700">
+                        First Name (required)
                     </label>
-                    <input type="email"
-                           id="email"
-                           x-model="formData.email"
+                    <input type="text"
+                           id="first-name"
+                           name="firstName"
                            required
                            class="w-full px-4 py-3 bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-forest focus:border-transparent transition-all">
                 </div>
-                <button type="submit"
-                        class="w-full md:w-auto px-8 py-4 bg-forest hover:bg-forest-dark text-cream font-bold rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg"
-                        x-text="content.contact.button">
-                </button>
-            </form>
-        </div>
-    </section>
-
-    {# Footer #}
-    <footer class="py-12 bg-forest-dark/95 text-cream border-t border-forest-light">
-        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex flex-col md:flex-row justify-between items-center gap-6">
-                <div class="flex gap-6">
-                    <a :href="content.social.instagram"
-                       target="_blank"
-                       class="hover:text-sage transition-colors">
-                        Instagram
-                    </a>
-                    <a :href="content.social.email"
-                       class="hover:text-sage transition-colors">
-                        Email
-                    </a>
-                    <a :href="content.social.linkedin"
-                       target="_blank"
-                       class="hover:text-sage transition-colors">
-                        LinkedIn
-                    </a>
+                <div class="text-left">
+                    <label for="last-name" class="block text-sm font-medium mb-2 text-gray-700">
+                        Last Name
+                    </label>
+                    <input type="text"
+                           id="last-name"
+                           name="lastName"
+                           class="w-full px-4 py-3 bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-forest focus:border-transparent transition-all">
                 </div>
-                <p class="text-sm text-cream/70">
-                    &copy; 2025 Selina Fillinger. All rights reserved.
-                </p>
             </div>
-        </div>
-    </footer>
+            <div class="text-left">
+                <label for="email" class="block text-sm font-medium mb-2 text-gray-700">
+                    Email (required)
+                </label>
+                <input type="email"
+                       id="email"
+                       name="email"
+                       required
+                       class="w-full px-4 py-3 bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-forest focus:border-transparent transition-all">
+            </div>
+            <button type="submit"
+                    class="w-full md:w-auto px-8 py-4 bg-forest hover:bg-forest-dark text-cream font-bold rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg">
+                {{ content.contact.button }}
+            </button>
+        </form>
+    </div>
+</section>
 
-</div>
+{# Footer #}
+<footer class="py-12 bg-forest-dark/95 text-cream border-t border-forest-light">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-col md:flex-row justify-between items-center gap-6">
+            <div class="flex gap-6">
+                <a href="{{ content.social.instagram }}"
+                   target="_blank"
+                   class="hover:text-sage transition-colors">
+                    Instagram
+                </a>
+                <a href="{{ content.social.email }}"
+                   class="hover:text-sage transition-colors">
+                    Email
+                </a>
+                <a href="{{ content.social.linkedin }}"
+                   target="_blank"
+                   class="hover:text-sage transition-colors">
+                    LinkedIn
+                </a>
+            </div>
+            <p class="text-sm text-cream/70">
+                &copy; 2025 Selina Fillinger. All rights reserved.
+            </p>
+        </div>
+    </div>
+</footer>
+
+{# Vanilla JavaScript for mobile menu toggle #}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const menuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        if (menuButton && mobileMenu) {
+            menuButton.addEventListener('click', function() {
+                const isExpanded = menuButton.getAttribute('aria-expanded') === 'true';
+                menuButton.setAttribute('aria-expanded', !isExpanded);
+                mobileMenu.classList.toggle('hidden');
+            });
+
+            // Close menu when clicking on a link
+            const mobileLinks = mobileMenu.querySelectorAll('a');
+            mobileLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    menuButton.setAttribute('aria-expanded', 'false');
+                    mobileMenu.classList.add('hidden');
+                });
+            });
+        }
+
+        // Contact form handler
+        const contactForm = document.getElementById('contact-form');
+        if (contactForm) {
+            contactForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const formData = new FormData(contactForm);
+                const data = Object.fromEntries(formData);
+                console.log('Form submitted:', data);
+                alert('Thank you for your interest! This is a demo form.');
+            });
+        }
+    });
+</script>
